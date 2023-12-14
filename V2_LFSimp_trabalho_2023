@@ -29,7 +29,7 @@ Software disponível (acessado em out/2023) para escrever/reconhecer a sintaxe d
 /* id a ser modificado - começa com letra, seguida de letras e dígitos e (não é uma palavra reservada) */
 /* já realizado no primeiro trabalho */
 
-<id>             ::=  (<character>)+
+id := <string clean>
 
 /* -- Operadores Relacionais -- */
 <eq_op>  ::= " == " | " != "
