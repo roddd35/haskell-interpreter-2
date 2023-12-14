@@ -93,6 +93,18 @@ data ExprS
     PlusS    { leftS :: ExprS, rightS :: ExprS }
   | -- Representa a operação de multiplicação.
     MultS    { leftS :: ExprS, rightS :: ExprS }
+  | -- Representa os operadores booleanos
+    GreaterTS  { leftS :: ExprS, rightS :: ExprS }
+  |
+    LowerTS  { leftS :: ExprS, rightS :: ExprS }
+  |
+    DiffOfS  { leftS :: ExprS, rightS :: ExprS }
+  |
+    EqToS  { leftS :: ExprS, rightS :: ExprS }
+  |
+    GreaterEqS  { leftS :: ExprS, rightS :: ExprS }
+  |
+    LowerEqS  { leftS :: ExprS, rightS :: ExprS }
   | -- | Representa a operação de subtação.
     BMinusS  { leftS :: ExprS, rightS :: ExprS }
   | -- | Representa o menos unário.
@@ -159,6 +171,18 @@ data ExprC
     PlusC   { leftC :: ExprC, rightC :: ExprC }
   | -- | Representa a operação de multiplicação.
     MultC   { leftC :: ExprC, rightC :: ExprC }
+  | -- Representa os operadores booleanos
+    GreaterTC  { leftC :: ExprC, rightC :: ExprC }
+  |
+    LowerTC  { leftC :: ExprC, rightC :: ExprC }
+  |
+    DiffOfC  { leftC :: ExprC, rightC :: ExprC }
+  |
+    EqToC  { leftC :: ExprC, rightC :: ExprC }
+  |
+    GreaterEqC  { leftC :: ExprC, rightC :: ExprC }
+  |
+    LowerEqC  { leftC :: ExprC, rightC :: ExprC }
   | -- | Representa uma função anônima (isto é, uma função sem nome).
     -- É definida na linguagem a partir do símbolo "lambda".
     LamC    { argNameC :: String, bodyC :: ExprC }

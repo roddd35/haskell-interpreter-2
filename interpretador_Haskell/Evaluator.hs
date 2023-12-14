@@ -42,6 +42,33 @@ eval exp env = case exp of
     case (eval e1 env, eval e2 env) of
       (NumV left, NumV right) -> NumV (left * right)
       (_, _)                  -> error "ERRO eval MultC: um dos argumentos não é um número"
+  
+  -- COMPARADORES BOOLEANOS
+  GreaterTC e1 e2 ->
+    case (eval e1 env, eval e2 env) of 
+      (NumV left, NumV right) -> BoolV (show(left > right))
+      (_, _)                  -> error "ERRO eval GreaterTC: um dos argumentos não é um número"
+  LowerTC e1 e2 ->
+    case (eval e1 env, eval e2 env) of 
+      (NumV left, NumV right) -> BoolV (show(left < right))
+      (_, _)                  -> error "ERRO eval LowerTC: um dos argumentos não é um número"
+  DiffOfC e1 e2 ->
+    case (eval e1 env, eval e2 env) of 
+      (NumV left, NumV right) -> BoolV (show(left /= right))
+      (_, _)                  -> error "ERRO eval DiffOfC: um dos argumentos não é um número"
+  EqToC e1 e2 ->
+    case (eval e1 env, eval e2 env) of 
+      (NumV left, NumV right) -> BoolV (show(left == right))
+      (_, _)                  -> error "ERRO eval EqToC: um dos argumentos não é um número"
+  GreaterEqC e1 e2 ->
+    case (eval e1 env, eval e2 env) of 
+      (NumV left, NumV right) -> BoolV (show(left >= right))
+      (_, _)                  -> error "ERRO eval GreaterEqC: um dos argumentos não é um número"
+  LowerEqC e1 e2 ->
+    case (eval e1 env, eval e2 env) of 
+      (NumV left, NumV right) -> BoolV (show(left <= right))
+      (_, _)                  -> error "ERRO eval LowerEqC: um dos argumentos não é um número"
+      
   LamC argName body -> ClosV argName body env
   AppC fun arg ->
     case closure of

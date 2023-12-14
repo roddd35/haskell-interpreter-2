@@ -27,19 +27,25 @@ import Types (ExprS (..), ExprC (..))
 -- código a esta função.
 desugar :: ExprS -> ExprC
 desugar expr = case expr of
-  NumS  num      -> NumC num
-  IdS   sym      -> IdC sym
-  BoolS bool     -> BoolC bool
-  PlusS e1 e2    -> PlusC (desugar e1) (desugar e2)
-  MultS e1 e2    -> MultC (desugar e1) (desugar e2)
-  BMinusS e1 e2  -> PlusC (desugar e1) (MultC (NumC (-1)) (desugar e2))
-  UMinusS e1     -> MultC (NumC (-1)) (desugar e1)
-  LamS argName b -> LamC argName (desugar b)
-  AppS fun arg   -> AppC (desugar fun) (desugar arg)
-  IfS cond b1 b2 -> IfC (desugar cond) (desugar b1) (desugar b2)
-  ConsS e1 e2    -> ConsC (desugar e1) (desugar e2)
-  HeadS e1       -> HeadC (desugar e1)
-  TailS e1       -> TailC (desugar e1)
+  NumS  num         -> NumC num
+  IdS   sym         -> IdC sym
+  BoolS bool        -> BoolC bool
+  PlusS e1 e2       -> PlusC (desugar e1) (desugar e2)
+  MultS e1 e2       -> MultC (desugar e1) (desugar e2)
+  GreaterTS e1 e2   -> GreaterTC (desugar e1) (desugar e2)
+  LowerTS e1 e2     -> LowerTC (desugar e1) (desugar e2)
+  EqToS e1 e2       -> EqToC (desugar e1) (desugar e2)
+  DiffOfS e1 e2     -> DiffOfC (desugar e1) (desugar e2)
+  GreaterEqS e1 e2  -> GreaterEqC (desugar e1) (desugar e2)
+  LowerEqS e1 e2    -> LowerEqC (desugar e1) (desugar e2)
+  BMinusS e1 e2     -> PlusC (desugar e1) (MultC (NumC (-1)) (desugar e2))
+  UMinusS e1        -> MultC (NumC (-1)) (desugar e1)
+  LamS argName b    -> LamC argName (desugar b)
+  AppS fun arg      -> AppC (desugar fun) (desugar arg)
+  IfS cond b1 b2    -> IfC (desugar cond) (desugar b1) (desugar b2)
+  ConsS e1 e2       -> ConsC (desugar e1) (desugar e2)
+  HeadS e1          -> HeadC (desugar e1)
+  TailS e1          -> TailC (desugar e1)
   LetS name val body ->
     AppC
       (LamC name (desugar body))
