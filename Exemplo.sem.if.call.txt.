@@ -1,0 +1,66 @@
+V2 - lingSimples - trabalho 2023
+
+Exemplo de como podemos retirar as palavras reservadas "if" e "call", mesmo sem o operador "-" da EBNF. Existem outras formas de fazer a exclusão... esse é só um exemplo.
+
+Nessa V2 os identificadores devem começar por uma letra, seguida de números e ou letras, e não podem ser palavras reservadas.
+
+
+Software disponível (set/2023) para escrever/reconhecer a sintaxe de linguagens
+ 
+ https://bnfplayground.pauliankline.com/
+
+
+ /* parte da sintaxe a ser definida para a linguagem */
+
+<character>     ::= <letter> | <digit> | <symbol>
+<letter>        ::= [a-z] | [A-Z] 
+<letter_a>      ::= [b-z] | [A-Z]
+<letter_f>      ::= [a-e] | [g-z] | [A-Z]
+<letter_l>      ::= [a-k] | [m-z] | [A-Z]
+<letter_i_c>    ::= [a-b] | [d-h] | [j-z] | [A-Z]
+<digit>         ::= [0-9]
+<intnum>        ::= <digit>+
+<number>        ::= <intnum> | <intnum> "." <intnum>
+<bool>          ::= "true" | "false"
+<other_symb>    ::=  "_" | "! " | "?" | "<" | ">" | "#" | "%"
+<reserv_symb>   ::=   "(" | ")" | "+" | "-" | "*" | "~" 
+<symbol>        ::=  <reserv_symb> | <other_symb>
+<reserv_word>   ::=  "cons" | "head" | "tail" | 
+                     "if" | "let" | "letrec" | 
+                     "lambda" | "call" |
+                     "true" | "false"
+                     
+<reservedW>      ::=  <reserv_symb> | <reserv_word>
+
+
+/* letras ou dígitos */
+   <l_digs> ::= <letter> | <digit>
+
+/* id começa com uma letra, seguido de letras e/ou dígitos */
+   <id_l_l_digs>   ::= (<letter>)+ (<l_digs>)*
+
+
+/* id começa com letra, seguida de letras e dígitos e (não é uma palavra reservada) */
+
+  /* começa por uma palavra reservada, seguido por pelo menos letra e/ou dígito */
+   <id_reserv_plus> ::= (<reserv_word>)+ (<l_digs>)+
+
+  /* não começa por palavras reservadas */
+  /* aqui temos os exemplos para excluir as palavras 'if' e 'call' - vejam que ainda faltam outras*/
+  /* será necessário dar tratamento especial para palavras que começam com a mesma letra ...*/
+
+   <id_no_if>   ::=  
+           "i" 
+         | "i" (<letter_f> | <digit>)+ (<l_digs>)*
+   <id_no_call> ::=  
+           "c"   | "c"   (<letter_a> | <digit>)+ (<l_digs>)*
+         | "ca"  | "ca"  (<letter_l> | <digit>)+ (<l_digs>)*
+         | "cal" | "cal" (<letter_l> | <digit>)+ (<l_digs>)*
+   
+   <id_no_reservW> ::=  
+            <id_no_if> 
+          | <id_no_call> 
+          | (<letter_i_c>)+ (<l_digs>)*
+
+/* identificador */
+   <id>            ::=  <id_reserv_plus> | <id_no_reservW> 
