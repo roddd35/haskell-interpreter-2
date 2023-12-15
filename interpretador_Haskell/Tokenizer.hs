@@ -54,7 +54,7 @@ getToken pred (char : chars)
 -- 
 -- Lembrando que uma `String` é uma lista de `Char`.
 symbols :: String
-symbols = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_!?-+*/%<>#~"
+symbols = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_!?-+*/%<>#~="
 
 -- | Lista de todos os digitos válidos para números da linguagem.
 numerals :: String
