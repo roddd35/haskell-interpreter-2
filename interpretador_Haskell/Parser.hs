@@ -69,6 +69,7 @@ parse tokens
 -- 
 -- Para adicionar funcionalidade à linguagem, é necessário acrescentar
 -- código a esta função.
+
 analyze :: ParseTree -> ExprS
 analyze tree = case tree of
   Null -> error "ERRO analyze: input inválido"
@@ -78,7 +79,7 @@ analyze tree = case tree of
       case readMaybe token of
         Just num -> NumS num
         Nothing -> error ("ERRO analyze: número inválido: " ++ token)
-    | isBool token -> BoolS token 
+    | isBool token -> BoolS token
     | otherwise -> error "ERRO analyze: token inválido"
   Pair first rest -> case first of
     Leaf "+"      -> PlusS (analyzePos 1) (analyzePos 2)

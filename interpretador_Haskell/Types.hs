@@ -145,7 +145,7 @@ data ExprS
   | -- | Transforma qualquer elemento da linguagem em um símbolo.
     QuoteS   { symbolS :: String }
   |
-  BoolS {boolS :: String}
+    BoolS    { boolS :: String }
   deriving (Show, Eq)
 
 -- | Árvore sintática com marcações de semântica, depois do processo
